@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package eventmanagementsystem;
 
-/**
- *
- * @author lokes
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+
 public class StudentLogin extends javax.swing.JFrame {
 
     /**
@@ -15,6 +14,8 @@ public class StudentLogin extends javax.swing.JFrame {
      */
     public StudentLogin() {
         initComponents();
+        
+        
     }
 
     /**
@@ -28,13 +29,13 @@ public class StudentLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        Back = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        stuid = new javax.swing.JTextField();
+        Login = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        stupwd = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,14 +45,14 @@ public class StudentLogin extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(23, 23, 23));
         jPanel2.setPreferredSize(new java.awt.Dimension(374, 786));
 
-        jButton2.setBackground(new java.awt.Color(23, 23, 23));
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(217, 217, 217));
-        jButton2.setText("<-  Back");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Back.setBackground(new java.awt.Color(23, 23, 23));
+        Back.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        Back.setForeground(new java.awt.Color(217, 217, 217));
+        Back.setText("<-  Back");
+        Back.setBorder(null);
+        Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BackActionPerformed(evt);
             }
         });
 
@@ -61,14 +62,14 @@ public class StudentLogin extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton2)
+                .addComponent(Back)
                 .addContainerGap(270, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton2)
+                .addComponent(Back)
                 .addContainerGap(726, Short.MAX_VALUE))
         );
 
@@ -77,26 +78,26 @@ public class StudentLogin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(23, 23, 23));
         jLabel1.setText("STUDENT LOGIN");
 
-        jTextField1.setBackground(new java.awt.Color(217, 217, 217));
-        jTextField1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(23, 23, 23));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        jTextField1.setPreferredSize(new java.awt.Dimension(460, 46));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        stuid.setBackground(new java.awt.Color(217, 217, 217));
+        stuid.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        stuid.setForeground(new java.awt.Color(23, 23, 23));
+        stuid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
+        stuid.setPreferredSize(new java.awt.Dimension(460, 46));
+        stuid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                stuidActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(23, 23, 23));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(217, 217, 217));
-        jButton1.setText("LOGIN");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));
-        jButton1.setPreferredSize(new java.awt.Dimension(146, 46));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Login.setBackground(new java.awt.Color(23, 23, 23));
+        Login.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Login.setForeground(new java.awt.Color(217, 217, 217));
+        Login.setText("LOGIN");
+        Login.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));
+        Login.setPreferredSize(new java.awt.Dimension(146, 46));
+        Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LoginActionPerformed(evt);
             }
         });
 
@@ -110,11 +111,16 @@ public class StudentLogin extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(23, 23, 23));
         jLabel5.setText("Password");
 
-        jPasswordField1.setBackground(new java.awt.Color(217, 217, 217));
-        jPasswordField1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(23, 23, 23));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        jPasswordField1.setPreferredSize(new java.awt.Dimension(460, 46));
+        stupwd.setBackground(new java.awt.Color(217, 217, 217));
+        stupwd.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        stupwd.setForeground(new java.awt.Color(23, 23, 23));
+        stupwd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
+        stupwd.setPreferredSize(new java.awt.Dimension(460, 46));
+        stupwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stupwdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,14 +137,14 @@ public class StudentLogin extends javax.swing.JFrame {
                         .addGap(111, 111, 111)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(stuid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(stupwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 160, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -152,13 +158,13 @@ public class StudentLogin extends javax.swing.JFrame {
                 .addGap(101, 101, 101)
                 .addComponent(jLabel4)
                 .addGap(27, 27, 27)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(stuid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jLabel5)
                 .addGap(27, 27, 27)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(stupwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -180,21 +186,103 @@ public class StudentLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        OpenLogin();
+        dispose();
+    }//GEN-LAST:event_BackActionPerformed
+
+    private void stuidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stuidActionPerformed
+
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        int reg = 0;
+        try
+	{
+            int a[]=new int[20];
+            String b[]=new String[20];
+            int i=0,t=0;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/eventmanagenetsystem","root","2511" );
+            Statement stmt=con.createStatement();
+            ResultSet rs= stmt.executeQuery("select stuid,stupwd from stulogin");
+			
+            while(rs.next())
+            {
+                a[i]=rs.getInt(1);
+                b[i]=rs.getString(2);
+                i++;
+            }
+            if(stuid.getText().isEmpty() && stupwd.getText().isEmpty())
+            {
+                 JOptionPane.showMessageDialog(null,"Enter Username and Password");
+            }
+            else if(stuid.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null,"Enter Username");
+            }
+            else if(stupwd.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null,"Enter Password");
+            }
+            else
+            {
+                boolean found=false;
+                for (int j=0;j<i;j++) 
+                {
+                    if (a[j]==Integer.valueOf(stuid.getText())) 
+                    {
+                        found=true;
+                        reg=Integer.valueOf(stuid.getText());
+                        t=j;
+                    }
+                }
+                if(found==true)
+                {
+                    String pass = stupwd.getText();
+                    if(b[t].equalsIgnoreCase(pass))
+                    {                        
+                        OpenStudentDashboard(reg);                        
+                        dispose();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Invalid Password");
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Invalid Register Number");
+                }   
+            }
+            con.close();  
+			
+			
+			
+	}catch(Exception e)
+		{
+			System.out.println("Exception");
+		}
+    }//GEN-LAST:event_LoginActionPerformed
+
+    private void stupwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stupwdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stupwdActionPerformed
+    
+    void OpenLogin(){
         Login login = new Login();
         login.setVisible(true);
-        login.pack();
-        login.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+        login.setLocationRelativeTo(null);       
+    }
+    
+    void OpenStudentDashboard(int reg){
+        StudentDashboard dash = new StudentDashboard(reg);
+        dash.setVisible(true);
+        dash.pack();
+        dash.setLocationRelativeTo(null);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -229,16 +317,16 @@ public class StudentLogin extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Back;
+    private javax.swing.JButton Login;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField stuid;
+    private javax.swing.JPasswordField stupwd;
     // End of variables declaration//GEN-END:variables
 }

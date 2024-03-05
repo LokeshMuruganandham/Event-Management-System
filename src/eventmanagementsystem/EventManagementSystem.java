@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package eventmanagementsystem;
 
-/**
- *
- * @author lokes
- */
 public class EventManagementSystem {
-
+    
     /**
      * @param args the command line arguments
      */
@@ -18,6 +10,8 @@ public class EventManagementSystem {
        login.setVisible(true);
        login.pack();
        login.setLocationRelativeTo(null);
+       
+       
     }
     
 }

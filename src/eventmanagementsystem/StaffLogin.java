@@ -1,15 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package eventmanagementsystem;
-
-/**
- *
- * @author lokes
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 public class StaffLogin extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form StaffLogin
      */
@@ -28,31 +25,33 @@ public class StaffLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        Back = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        staffid = new javax.swing.JTextField();
+        Login = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        staffpwd = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1105, 786));
 
         jPanel1.setBackground(new java.awt.Color(217, 217, 217));
+        jPanel1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        jPanel1.setMaximumSize(new java.awt.Dimension(1105, 786));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1105, 786));
         jPanel1.setPreferredSize(new java.awt.Dimension(1105, 786));
 
         jPanel2.setBackground(new java.awt.Color(23, 23, 23));
         jPanel2.setPreferredSize(new java.awt.Dimension(374, 786));
 
-        jButton2.setBackground(new java.awt.Color(23, 23, 23));
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(217, 217, 217));
-        jButton2.setText("<-  Back");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Back.setBackground(new java.awt.Color(23, 23, 23));
+        Back.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        Back.setForeground(new java.awt.Color(217, 217, 217));
+        Back.setText("<-  Back");
+        Back.setBorder(null);
+        Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BackActionPerformed(evt);
             }
         });
 
@@ -62,42 +61,44 @@ public class StaffLogin extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton2)
+                .addComponent(Back)
                 .addContainerGap(270, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton2)
+                .addComponent(Back)
                 .addContainerGap(726, Short.MAX_VALUE))
         );
 
         jLabel1.setBackground(new java.awt.Color(217, 217, 217));
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel1.setText("STAFF LOGIN");
+        jLabel1.setText("FACULTY LOGIN");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setPreferredSize(new java.awt.Dimension(247, 40));
 
-        jTextField1.setBackground(new java.awt.Color(217, 217, 217));
-        jTextField1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(23, 23, 23));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        jTextField1.setPreferredSize(new java.awt.Dimension(460, 46));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        staffid.setBackground(new java.awt.Color(217, 217, 217));
+        staffid.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        staffid.setForeground(new java.awt.Color(23, 23, 23));
+        staffid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
+        staffid.setPreferredSize(new java.awt.Dimension(460, 46));
+        staffid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                staffidActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(23, 23, 23));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(217, 217, 217));
-        jButton1.setText("LOGIN");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));
-        jButton1.setPreferredSize(new java.awt.Dimension(146, 46));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Login.setBackground(new java.awt.Color(23, 23, 23));
+        Login.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Login.setForeground(new java.awt.Color(217, 217, 217));
+        Login.setText("LOGIN");
+        Login.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));
+        Login.setPreferredSize(new java.awt.Dimension(146, 46));
+        Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LoginActionPerformed(evt);
             }
         });
 
@@ -111,11 +112,11 @@ public class StaffLogin extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(23, 23, 23));
         jLabel5.setText("Password");
 
-        jPasswordField1.setBackground(new java.awt.Color(217, 217, 217));
-        jPasswordField1.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(23, 23, 23));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        jPasswordField1.setPreferredSize(new java.awt.Dimension(460, 46));
+        staffpwd.setBackground(new java.awt.Color(217, 217, 217));
+        staffpwd.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        staffpwd.setForeground(new java.awt.Color(23, 23, 23));
+        staffpwd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
+        staffpwd.setPreferredSize(new java.awt.Dimension(460, 46));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,22 +126,22 @@ public class StaffLogin extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(staffid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 160, Short.MAX_VALUE))))))
+                                    .addComponent(staffpwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 160, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,17 +150,17 @@ public class StaffLogin extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addComponent(jLabel1)
-                .addGap(101, 101, 101)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96)
                 .addComponent(jLabel4)
                 .addGap(27, 27, 27)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(staffid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jLabel5)
                 .addGap(27, 27, 27)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(staffpwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -181,20 +182,85 @@ public class StaffLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Login login = new Login();
-        login.setVisible(true);
-        login.pack();
-        login.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        OpenLogin();
+        dispose();
+    }//GEN-LAST:event_BackActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void staffidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffidActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_staffidActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        
+        try
+	{
+            int a[]=new int[20];
+            String b[]=new String[20];
+            int i=0,t=0;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/eventmanagenetsystem","root","2511" );
+            Statement stmt=con.createStatement();
+            ResultSet rs= stmt.executeQuery("select staffid,staffpwd from stafflogin");
+			
+            while(rs.next())
+            {
+                a[i]=rs.getInt(1);
+                b[i]=rs.getString(2);
+                i++;
+            }
+            if(staffid.getText().isEmpty() && staffpwd.getText().isEmpty())
+            {
+                 JOptionPane.showMessageDialog(null,"Enter Username and Password");
+            }
+            else if(staffid.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null,"Enter Username");
+            }
+            else if(staffpwd.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null,"Enter Password");
+            }
+            else
+            {
+                boolean found=false;
+                for (int j=0;j<i;j++) 
+                {
+                    if (a[j]==Integer.valueOf(staffid.getText())) 
+                    {
+                        found=true;
+                        
+                        t=j;
+                    }
+                }
+                if(found==true)
+                {
+                    String pass = staffpwd.getText();
+                    if(b[t].equalsIgnoreCase(pass))
+                    {                        
+                        Openlistedevents();                       
+                        dispose();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Invalid Password");
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Invalid Register Number");
+                }   
+            }
+            con.close();  
+			
+			
+			
+	}catch(Exception e)
+		{
+			System.out.println("Exception");
+		}
+        
+    }//GEN-LAST:event_LoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,15 +297,29 @@ public class StaffLogin extends javax.swing.JFrame {
         });
     }
 
+    void OpenLogin(){
+        Login login = new Login();
+        login.setVisible(true);
+        login.pack();
+        login.setLocationRelativeTo(null);
+    }
+    
+    void Openlistedevents(){
+        StafflistedEvents stafflisted = new StafflistedEvents();
+        stafflisted.setVisible(true);
+        stafflisted.pack();
+        stafflisted.setLocationRelativeTo(null);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Back;
+    private javax.swing.JButton Login;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField staffid;
+    private javax.swing.JPasswordField staffpwd;
     // End of variables declaration//GEN-END:variables
 }
