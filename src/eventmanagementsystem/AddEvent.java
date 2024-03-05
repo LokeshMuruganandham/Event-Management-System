@@ -283,7 +283,7 @@ public class AddEvent extends javax.swing.JFrame {
 
     private void AddnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddnewActionPerformed
         addevent();
-        JOptionPane.showMessageDialog(null,"Event Added Successfully");
+        
     }//GEN-LAST:event_AddnewActionPerformed
 
     private void eventnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventnameActionPerformed
@@ -323,8 +323,12 @@ void addevent() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventmanagenetsystem", "root", "2511");
-            
-            String dateString = eventdate.getText();
+            if(eventdate.getText().isEmpty() | eventname.getText().isEmpty() | venue.getText().isEmpty())
+            {
+                 JOptionPane.showMessageDialog(null,"Fill all Details ");
+            }
+            else{
+                String dateString = eventdate.getText();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             date = dateFormat.parse(dateString);
             PreparedStatement preparedStatement = con.prepareStatement("insert into listedevents(eventname, eventdate, venue) values (?, ?, ?)");
@@ -333,6 +337,13 @@ void addevent() {
             preparedStatement.setDate(2, enentdatecon);
             preparedStatement.setString(3, venue.getText());
             int row = preparedStatement.executeUpdate();
+            eventname.setText("");
+            eventdate.setText("");
+            venue.setText("");
+            JOptionPane.showMessageDialog(null,"Event Added Successfully");
+            
+            }
+            
             
           
         } catch (Exception e) {

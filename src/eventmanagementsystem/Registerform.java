@@ -284,6 +284,7 @@ private void Displaylistedevents(){
         selected = (String) listedcombobox.getSelectedItem();
         getevent();
         addevent();
+        listedcombobox.setSelectedIndex(-1);
         JOptionPane.showMessageDialog(null,"Event Added Successfully");
         
         

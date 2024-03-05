@@ -247,6 +247,7 @@ dispose();
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         selected = (String) listedcombobox.getSelectedItem();
         deleteeve();
+        listedcombobox.setSelectedIndex(-1);
         JOptionPane.showMessageDialog(null,"Event Deleted Successfully");
 
     }//GEN-LAST:event_deleteActionPerformed
@@ -297,6 +298,11 @@ dispose();
             PreparedStatement preparedStatement = con.prepareStatement("Delete from listedevents where eventname=?");
             preparedStatement.setString(1, selected);
             int row = preparedStatement.executeUpdate();
+            
+            PreparedStatement preparedStatement1 = con.prepareStatement("Delete from registeredevents where eventname=?");
+            preparedStatement1.setString(1, selected);
+            int row1 = preparedStatement1.executeUpdate();
+            
             Displaylistedtable();
           
         } catch (Exception e) {
